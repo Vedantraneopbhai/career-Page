@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Secure Cyber</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+    <style>
+        :root {
+            --primary-dark: #0a192f;
+            --primary: #1e4b8f;
+            --accent: #64ffda;
+            --text: #ccd6f6;
+            --text-light: #8892b0;
+            --success: #4bb543;
+            --error: #ff3333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-dark);
+            color: var(--text);
+            line-height: 1.7;
+        }
+        
+        .admin-header {
+            background: rgba(10, 25, 47, 0.9);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        .admin-nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .admin-nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-nav a:hover {
+            color: var(--accent);
+        }
+        
+        .logout-btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+        }
+        
+        .dashboard-container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: rgba(23, 42, 69, 0.5);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        .stat-card h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .stat-card p {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        .applications-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+        
+        .applications-table th,
+        .applications-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        .applications-table th {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            color: orange;
+        }
+        
+        .status-reviewed {
+            color: var(--success);
+        }
+        
+        .status-rejected {
+            color: var(--error);
+        }
+        
+        .action-btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+        }
+        
+        .resume-link {
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .resume-link:hover {
+            text-decoration: underline;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 47, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: var(--primary-dark);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--accent);
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .close-modal {
+            background: transparent;
+            border: none;
+            color: var(--accent);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .application-details p {
+            margin-bottom: 1rem;
+        }
+        
+        .detail-label {
+            color: var(--accent);
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .applications-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="admin-header">
+        <h2>Secure Cyber Admin Dashboard</h2>
+        <nav class="admin-nav">
+            <a href="#applications">Applications</a>
+            <a href="#settings">Settings</a>
+            <span id="adminWelcome"></span>
+            <button class="logout-btn" id="logoutBtn">Logout</button>
+        </nav>
+    </header>
+    
+    <main class="dashboard-container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Applications</h3>
+                <p id="totalApplications">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Pending Reviews</h3>
+                <p id="pendingApplications">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Approved</h3>
+                <p id="approvedApplications">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Rejected</h3>
+                <p id="rejectedApplications">0</p>
+            </div>
+        </div>
+        
+        <h3>Recent Applications</h3>
+        <table class="applications-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Position</th>
+                    <th>Resume</th>
+                    <th>Status</th>
+                    <th>Applied On</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="applicationsTableBody">
+                <!-- Applications will be loaded here -->
+            </tbody>
+        </table>
+    </main>
+
+    <!-- Application Details Modal -->
+    <div class="modal" id="applicationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Application Details</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="application-details" id="applicationDetails">
+                <!-- Details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Initialize Supabase
+        const supabaseUrl = 'https://mxsjutdmhwivzuxsggmv.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im14c2p1dGRtaHdpdnp1eHNnZ212Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMwNDQ0NDksImV4cCI6MjA1ODYyMDQ0OX0.j78qfJ_iM7n9SUCWEXapvJo9kvbxgL1f30ad7ROFNv8';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        
+        // Check authentication
+        const adminAuth = JSON.parse(sessionStorage.getItem('adminAuth'));
+        
+        if (!adminAuth) {
+            window.location.href = 'admin.html';
+        } else {
+            document.getElementById('adminWelcome').textContent = `Welcome, ${adminAuth.username}`;
+        }
+        
+        // Logout handler
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            sessionStorage.removeItem('adminAuth');
+            window.location.href = 'admin.html';
+        });
+        
+        // Modal handlers
+        const modal = document.getElementById('applicationModal');
+        const closeModal = document.getElementById('closeModal');
+        
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Load admin data
+        async function loadAdminData() {
+            try {
+                // Fetch application stats
+                const { count: total } = await supabase
+                    .from('applications')
+                    .select('*', { count: 'exact' });
+                
+                const { count: pending } = await supabase
+                    .from('applications')
+                    .select('*', { count: 'exact' })
+                    .eq('status', 'pending');
+                
+                const { count: approved } = await supabase
+                    .from('applications')
+                    .select('*', { count: 'exact' })
+                    .eq('status', 'approved');
+                
+                const { count: rejected } = await supabase
+                    .from('applications')
+                    .select('*', { count: 'exact' })
+                    .eq('status', 'rejected');
+                
+                document.getElementById('totalApplications').textContent = total || 0;
+                document.getElementById('pendingApplications').textContent = pending || 0;
+                document.getElementById('approvedApplications').textContent = approved || 0;
+                document.getElementById('rejectedApplications').textContent = rejected || 0;
+                
+                // Fetch recent applications
+                const { data: applications, error } = await supabase
+                    .from('applications')
+                    .select('*')
+                    .order('created_at', { ascending: false })
+                    .limit(10);
+                
+                if (error) throw error;
+                
+                // Populate table
+                const tableBody = document.getElementById('applicationsTableBody');
+                tableBody.innerHTML = '';
+                
+                applications.forEach(app => {
+                    // Extract file name from the URL
+                    let fileName = "Resume.pdf";
+                    if (app.resume_url) {
+                        const urlParts = app.resume_url.split('/');
+                        fileName = urlParts[urlParts.length - 1].split('?')[0];
+                    }
+                    
+                    const row = document.createElement('tr');
+                    
+                    row.innerHTML = `
+                        <td>${app.first_name} ${app.last_name}</td>
+                        <td>${app.email}</td>
+                        <td>${app.position}</td>
+                        <td>
+                            <a href="${app.resume_url}" target="_blank" class="resume-link">
+                                ${fileName}
+                                <i class='bx bx-download'></i>
+                            </a>
+                        </td>
+                        <td class="status-${app.status}">${app.status}</td>
+                        <td>${new Date(app.created_at).toLocaleDateString()}</td>
+                        <td>
+                            <button class="action-btn" data-id="${app.id}" data-action="view">View</button>
+                            <button class="action-btn" data-id="${app.id}" data-action="approve">Approve</button>
+                            <button class="action-btn" data-id="${app.id}" data-action="reject">Reject</button>
+                        </td>
+                    `;
+                    
+                    tableBody.appendChild(row);
+                });
+                
+                // Add event listeners to action buttons
+                document.querySelectorAll('.action-btn').forEach(btn => {
+                    btn.addEventListener('click', handleApplicationAction);
+                });
+                
+            } catch (error) {
+                console.error('Error loading admin data:', error);
+            }
+        }
+        
+        // Handle application actions
+        async function handleApplicationAction(e) {
+            const appId = e.target.getAttribute('data-id');
+            const action = e.target.getAttribute('data-action');
+            
+            try {
+                if (action === 'view') {
+                    // Show application details in modal
+                    const { data: application, error } = await supabase
+                        .from('applications')
+                        .select('*')
+                        .eq('id', appId)
+                        .single();
+                    
+                    if (error) throw error;
+                    
+                    // Extract file name from the URL
+                    let fileName = "Resume.pdf";
+                    if (application.resume_url) {
+                        const urlParts = application.resume_url.split('/');
+                        fileName = urlParts[urlParts.length - 1].split('?')[0];
+                    }
+                    
+                    // Format the details for display
+                    const details = `
+                        <p><span class="detail-label">Name:</span> ${application.first_name} ${application.last_name}</p>
+                        <p><span class="detail-label">Email:</span> ${application.email}</p>
+                        <p><span class="detail-label">Phone:</span> ${application.phone}</p>
+                        <p><span class="detail-label">Position:</span> ${application.position}</p>
+                        <p><span class="detail-label">Status:</span> <span class="status-${application.status}">${application.status}</span></p>
+                        <p><span class="detail-label">Applied On:</span> ${new Date(application.created_at).toLocaleString()}</p>
+                        <p><span class="detail-label">Resume:</span> 
+                            <a href="${application.resume_url}" target="_blank" class="resume-link">
+                                ${fileName}
+                                <i class='bx bx-download'></i>
+                            </a>
+                        </p>
+                        <p><span class="detail-label">Cover Letter:</span></p>
+                        <div style="background: rgba(23, 42, 69, 0.5); padding: 1rem; border-radius: 4px; margin-top: 0.5rem;">
+                            ${application.cover_letter || 'No cover letter provided'}
+                        </div>
+                    `;
+                    
+                    document.getElementById('applicationDetails').innerHTML = details;
+                    document.getElementById('applicationModal').style.display = 'flex';
+                    
+                } else if (action === 'approve' || action === 'reject') {
+                    if (!confirm(`Are you sure you want to ${action} this application?`)) {
+                        return;
+                    }
+                    
+                    const newStatus = action === 'approve' ? 'approved' : 'rejected';
+                    
+                    const { error } = await supabase
+                        .from('applications')
+                        .update({ status: newStatus })
+                        .eq('id', appId);
+                    
+                    if (error) throw error;
+                    
+                    // Refresh data
+                    loadAdminData();
+                }
+                
+            } catch (error) {
+                console.error('Error handling application action:', error);
+                alert('Failed to process application');
+            }
+        }
+        
+        // Load data when page loads
+        loadAdminData();
+    </script>
+</body>
+</html>

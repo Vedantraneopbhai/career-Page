@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Cyber | Enterprise Cybersecurity Solutions</title>
+    <meta name="description" content="Enterprise-grade cybersecurity solutions to protect your digital assets from evolving threats">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0a192f;
+            --primary: #1e4b8f;
+            --primary-light: #4a8fe7;
+            --secondary: #172a45;
+            --accent: #64ffda;
+            --light: #f8f9fa;
+            --dark: #020c1b;
+            --text: #ccd6f6;
+            --text-light: #8892b0;
+            --success: #4bb543;
+            --error: #ff3333;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --section-spacing: 8rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.7;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            scroll-behavior: smooth;
+            background-color: var(--dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(10, 25, 47, 0.9);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.8s ease-out;
+            height: 80px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+            padding: 0 5%;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        nav .left {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+        }
+
+        /* Typing animation for the title */
+        .typing-title {
+            position: relative;
+            font-family: 'Space Grotesk', sans-serif;
+            min-width: 250px;
+        }
+        
+        .typing-title::after {
+            content: '|';
+            position: absolute;
+            right: -8px;
+            color: var(--accent);
+            animation: blink 0.7s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+            letter-spacing: 0.5px;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.4s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .left img {
+            height: 40px;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
+       
+        main {
+            flex: 1;
+        }
+
+        .firstsection {
+            position: relative;
+            margin-bottom: var(--section-spacing);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            height: 90vh;
+            min-height: 700px;
+            overflow: hidden;
+        }
+
+        .firstsection.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4);
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 80%;
+            max-width: 1200px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            background: transparent;
+            color: var(--accent);
+            padding: 15px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            border: 1px solid var(--accent);
+            transition: var(--transition);
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-light);
+            font-size: 0.9rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+
+        .scroll-indicator::after {
+            content: '';
+            display: block;
+            width: 1px;
+            height: 40px;
+            background: var(--text-light);
+            margin: 10px auto 0;
+        }
+
+        /* About Section */
+        .section {
+            padding: 0 5%;
+            margin-bottom: var(--section-spacing);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: var(--text);
+            margin-bottom: 5rem;
+            letter-spacing: -0.03em;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .section-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title span {
+            color: var(--accent);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1rem auto 0;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .about-image.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: -20px;
+            bottom: -20px;
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .about-content {
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .about-content.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .about-content h3 {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: rgba(23, 42, 69, 0.5);
+            border-radius: 8px;
+            border-top: 2px solid var(--accent);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .stat-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Services Section */
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: rgba(23, 42, 69, 0.5);
+            border-radius: 8px;
+            padding: 2.5rem;
+            transition: var(--transition);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .service-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        /* Clients Section */
+        .clients-section {
+            background: rgba(10, 25, 47, 0.5);
+            padding: 5rem 5%;
+            margin-bottom: var(--section-spacing);
+        }
+
+        .clients-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .client-logos {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .client-logo {
+            border-radius: 15%;
+            opacity: 1;
+            transition: var(--transition);
+            max-width: 300px;
+            max-height: 150px;
+        }
+
+        .client-logo:hover {
+            filter: grayscale(0) brightness(1);
+            opacity: 1;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: rgba(10, 25, 47, 0.5);
+            padding: 5rem 5%;
+            margin-bottom: 0;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .contact-info {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            text-align: center;
+        }
+
+        .contact-info.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-details {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+            max-width: 300px;
+            width: 100%;
+        }
+
+        .contact-icon {
+            color: var(--accent);
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        .contact-form {
+            background: rgba(23, 42, 69, 0.5);
+            border-radius: 8px;
+            padding: 2.5rem;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .contact-form.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 4px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: transparent;
+            color: var(--accent);
+            padding: 12px 30px;
+            border-radius: 4px;
+            border: 1px solid var(--accent);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+            display: inline-block;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-dark);
+            padding: 3rem 5%;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-about {
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            margin-right: 15px;
+        }
+
+        .footer-about p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 50%;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h3, .footer-contact h3 {
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-links h3::after, .footer-contact h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .footer-links i {
+            margin-right: 8px;
+            font-size: 0.8rem;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+            color: var(--text-light);
+        }
+
+        .footer-bottom a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .about-container, .contact-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .about-image {
+                order: -1;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                height: auto;
+                padding: 1.5rem;
+            }
+            
+            nav .left {
+                margin-bottom: 1.5rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+            
+            .typing-title {
+                min-width: 200px;
+            }
+            
+            .firstsection {
+                height: 80vh;
+                min-height: 600px;
+            }
+            
+            .section {
+                margin-bottom: 5rem;
+            }
+            
+            .client-logos {
+                gap: 2rem;
+            }
+
+            .contact-info {
+                text-align: center;
+            }
+
+            .contact-details {
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                margin-bottom: 3rem;
+            }
+            
+            .service-card, .contact-form {
+                padding: 1.5rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .typing-title {
+                min-width: 150px;
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Animation Classes */
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
+        .delay-4 { transition-delay: 0.8s; }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="left">
+                <img src="companyimg.jpeg.jpg" alt="Secure Cyber Logo">
+                <span class="typing-title" id="animatedTitle"></span>
+            </div>
+            <ul>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#clients">Clients</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="career.html">Careers</a></li>
+                <li><a href="admin.html">Admin Login</a></li>
+                <li><a href="chat.html">Query Chat</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+      
+        <section class="firstsection">
+            <video class="hero-video" width="100%" height="100%" autoplay muted loop>
+                <source src="vid.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="hero-content">
+                <h1 class="hero-title">Enterprise Cybersecurity Solutions</h1>
+                <p class="hero-subtitle">Protecting your digital assets with cutting-edge security solutions tailored to your organization's needs</p>
+                <a href="#contact" class="cta-button">Get Protected Today</a>
+            </div>
+            <div class="scroll-indicator">Scroll Down</div>
+        </section>
+
+        
+        <section id="about" class="section">
+            <h2 class="section-title">About <span>Secure Cyber</span></h2>
+            <div class="about-container">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Cybersecurity Team">
+                </div>
+                <div class="about-content">
+                    <h3>Your Trusted Cybersecurity Partner</h3>
+                    <p>Secure Cyber is a leading provider of enterprise-grade cybersecurity solutions, dedicated to protecting organizations from evolving digital threats. Our team of certified security experts brings decades of combined experience across industries.</p>
+                    <p>We take a proactive approach to cybersecurity, combining advanced technology with strategic insights to build robust digital defenses that evolve with the threat landscape.</p>
+                    <p>Our mission is to empower organizations with state-of-the-art security solutions that anticipate emerging threats while enabling business growth without compromising security.</p>
+                </div>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-item delay-1">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Enterprise Clients</div>
+                </div>
+                <div class="stat-item delay-2">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Threat Detection</div>
+                </div>
+                <div class="stat-item delay-3">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Security Monitoring</div>
+                </div>
+                <div class="stat-item delay-4">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Certified Experts</div>
+                </div>
+            </div>
+        </section>
+
+      
+        <section id="services" class="section">
+            <h2 class="section-title">Our <span>Services</span></h2>
+            <div class="services-container">
+                <div class="service-card delay-1">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Vulnerability Assessment</h3>
+                    <p>Comprehensive security audits to identify and prioritize vulnerabilities in your digital infrastructure before they can be exploited.</p>
+                </div>
+                <div class="service-card delay-2">
+                    <div class="service-icon">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <h3>Penetration Testing</h3>
+                    <p>Simulated cyber attacks by our ethical hackers to test your defenses and identify security weaknesses.</p>
+                </div>
+                <div class="service-card delay-3">
+                    <div class="service-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Managed Security</h3>
+                    <p>24/7 monitoring and management of your security infrastructure by our team of experts.</p>
+                </div>
+                <div class="service-card delay-4">
+                    <div class="service-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Security</h3>
+                    <p>Specialized protection for your cloud environments with architecture reviews and continuous monitoring.</p>
+                </div>
+                <div class="service-card delay-1">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>App Security</h3>
+                    <p>Secure development lifecycle consulting and application security testing for web and mobile apps.</p>
+                </div>
+                <div class="service-card delay-2">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Security Training</h3>
+                    <p>Customized cybersecurity awareness programs to educate your team on security best practices.</p>
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="clients" class="clients-section">
+            <h2 class="section-title">Trusted By <span>Leading Organizations</span></h2>
+            <div class="clients-container">
+                <div class="client-logos">
+                    <img src="google.png" class="client-logo">
+                    <img src="microsoft.png" class="client-logo">
+                    <img src="dell.png" class="client-logo">
+                </div>
+            </div>
+        </section>
+
+    
+        <section id="contact" class="contact-section">
+            <h2 class="section-title">Get In <span>Touch</span></h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Ready to Secure Your Organization?</h3>
+                    <p>Contact our cybersecurity experts today to discuss your security needs and how we can help protect your digital assets from evolving threats.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt contact-icon"></i>
+                            <div>INDIA, USA, UK, NL.</div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope contact-icon"></i>
+                            <div>contact@securecyberfuture.com</div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock contact-icon"></i>
+                            <div>Monday - Friday: 9AM - 6PM EST</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">How Can We Help?</label>
+                            <textarea id="message" name="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="companyimg.jpeg.jpg" alt="Secure Cyber Logo">
+                    <span>SECURE CYBER</span>
+                </div>
+                <p>Enterprise-grade cybersecurity solutions to protect your digital assets from evolving threats.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="#services"><i class="fas fa-chevron-right"></i> Services</a></li>
+                    <li><a href="#clients"><i class="fas fa-chevron-right"></i> Clients</a></li>
+                    <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    <li><a href="admin.html"><i class="fas fa-chevron-right"></i> Admin Login</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#"></i> Vulnerability Assessment</a></li>
+                    <li><a href="#"></i> Penetration Testing</a></li>
+                    <li><a href="#"></i> Managed Security</a></li>
+                    <li><a href="#"></i> Cloud Security</a></li>
+                    <li><a href="#"></i> App Security</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Secure Cyber Future - 30 wall st. 8th Floor,New York,NY 10005</p>
+                <p><i class="fas fa-envelope"></i> info@securecyberfuture.com</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 9AM - 6PM EST</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Secure Cyber. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        
+        const title = "SECURE CYBER FUTURE";
+        const animatedTitle = document.getElementById('animatedTitle');
+        let i = 0;
+        
+        function typeWriter() {
+            if (i < title.length) {
+                animatedTitle.innerHTML += title.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            } else {
+                animatedTitle.innerHTML = title;
+                animatedTitle.classList.add('typing-complete');
+            }
+        }
+        
+        window.onload = function() {
+            setTimeout(typeWriter, 1000);
+        };
+
+        
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        const sections = document.querySelectorAll('.firstsection, .section-title, .about-image, .about-content, .stat-item, .service-card, .contact-info, .contact-form');
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+        
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                
+                const subject = encodeURIComponent(name);
+                
+                const body = encodeURIComponent(
+                    `Contact Details:\n` +
+                    `----------------\n` +
+                    `Name: ${name}\n` +
+                    `Email: ${email}\n\n` +
+                    `Message:\n` +
+                    `--------\n` +
+                    `${message}\n\n` +
+                    `Sent via Secure Cyber contact form`
+                );
+                
+                
+                const outlookLink = `https://outlook.office365.com/mail/deeplink/compose?mailtouri=mailto%3Acontact%40securecyberfuture.com&subject=${subject}&body=${body}`;
+                
+                
+                window.location.href = outlookLink;
+            });
+        }
+    </script>
+</body>
+</html>

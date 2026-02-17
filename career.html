@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Cyber | Career Opportunities</title>
+    <meta name="description" content="Join our team of cybersecurity experts and help protect organizations from digital threats">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0a192f;
+            --primary: #1e4b8f;
+            --primary-light: #4a8fe7;
+            --secondary: #172a45;
+            --accent: #64ffda;
+            --light: #f8f9fa;
+            --dark: #020c1b;
+            --text: #ccd6f6;
+            --text-light: #8892b0;
+            --success: #4bb543;
+            --error: #ff3333;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --section-spacing: 8rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.7;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            scroll-behavior: smooth;
+            background-color: var(--dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(10, 25, 47, 0.9);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.8s ease-out;
+            height: 80px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+            padding: 0 5%;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        nav .left {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+        }
+
+        /* Typing animation for the title */
+        .typing-title {
+            position: relative;
+            font-family: 'Space Grotesk', sans-serif;
+            min-width: 250px;
+        }
+        
+        .typing-title::after {
+            content: '|';
+            position: absolute;
+            right: -8px;
+            color: var(--accent);
+            animation: blink 0.7s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+            letter-spacing: 0.5px;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.4s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .left img {
+            height: 40px;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
+        /* Hero Section */
+        .career-hero {
+            position: relative;
+            margin-bottom: var(--section-spacing);
+            height: 60vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(10, 25, 47, 0.8) 0%, rgba(23, 42, 69, 0.8) 100%), 
+                        url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .career-hero.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 5%;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: var(--text-light);
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+        }
+
+        /* Jobs Section */
+        .section {
+            padding: 0 5%;
+            margin-bottom: var(--section-spacing);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: var(--text);
+            margin-bottom: 5rem;
+            letter-spacing: -0.03em;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .section-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title span {
+            color: var(--accent);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1rem auto 0;
+        }
+
+        .jobs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .job-card {
+            background: rgba(23, 42, 69, 0.5);
+            border-radius: 8px;
+            padding: 2.5rem;
+            transition: var(--transition);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent);
+        }
+
+        .job-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .job-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent);
+        }
+
+        .job-title {
+            font-size: 1.6rem;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .job-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--primary-light));
+            border-radius: 3px;
+        }
+
+        .job-details {
+            margin-top: 1.5rem;
+        }
+
+        .job-details ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .job-details li {
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .job-details li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6em;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .job-card:hover li::before {
+            transform: scale(1);
+        }
+
+        .experience {
+            display: inline-block;
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Apply Button */
+        .apply-container {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .apply-button {
+            background: transparent;
+            color: var(--accent);
+            padding: 15px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            border: 1px solid var(--accent);
+            transition: var(--transition);
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .apply-button.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .apply-button:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2);
+        }
+
+        .apply-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .apply-button:hover::before {
+            left: 100%;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary) 100%);
+            padding: 3rem 5%;
+            color: white;
+            font-size: 0.9rem;
+            animation: slideUp 0.5s ease-out;
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+            margin-top: auto;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            margin-right: 15px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        .footer-logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-light), white);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-about p {
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .footer-links h3, .footer-contact h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            color: white;
+        }
+
+        .footer-links h3::after, .footer-contact h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-light), white);
+            border-radius: 3px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+            transform: translateX(5px);
+        }
+
+        .footer-links i {
+            margin-right: 8px;
+            font-size: 0.8rem;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom a {
+            color: var(--primary-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .jobs-container {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+            
+            nav ul {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                height: auto;
+                padding: 1.5rem;
+            }
+            
+            nav .left {
+                margin-bottom: 1.5rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .career-hero {
+                height: 50vh;
+                min-height: 400px;
+            }
+            
+            .section {
+                margin-bottom: 5rem;
+            }
+            
+            .job-card {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 3rem;
+            }
+            
+            .jobs-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .job-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Animation Classes */
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
+        .delay-4 { transition-delay: 0.8s; }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="left">
+                <img src="companyimg.jpeg.jpg" alt="Secure Cyber Logo">
+                <span class="typing-title" id="animatedTitle"></span>
+            </div>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="#jobs">Careers</a></li>
+                <li><a href="admin.html">Admin Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="career-hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Join Our Cybersecurity Team</h1>
+                <p class="hero-subtitle">Help protect organizations from evolving digital threats while growing your career in cybersecurity</p>
+            </div>
+        </section>
+
+        <!-- Jobs Section -->
+        <section id="jobs" class="section">
+            <h2 class="section-title">Current <span>Openings</span></h2>
+            <div class="jobs-container">
+                <div class="job-card delay-1">
+                    <div class="experience">2-5 years experience</div>
+                    <h3 class="job-title">Security Analyst</h3>
+                    <div class="job-details">
+                        <ul>
+                            <li>Knowledge of security tools and software</li>
+                            <li>Problem solving skills</li>
+                            <li>Basic understanding of operating system</li>
+                            <li>Network security fundamentals</li>
+                            <li>Threat detection and analysis</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="job-card delay-2">
+                    <div class="experience">5+ years experience</div>
+                    <h3 class="job-title">Penetration Tester</h3>
+                    <div class="job-details">
+                        <ul>
+                            <li>Strong understanding of computer systems</li>
+                            <li>Knowledge of hacking tools</li>
+                            <li>Analytical skills</li>
+                            <li>Ethical hacking certifications</li>
+                            <li>Vulnerability assessment experience</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="job-card delay-3">
+                    <div class="experience">2-4 years experience</div>
+                    <h3 class="job-title">Security Engineer</h3>
+                    <div class="job-details">
+                        <ul>
+                            <li>In-depth knowledge of computer networking</li>
+                            <li>Programming and scripting skills</li>
+                            <li>Cloud security knowledge</li>
+                            <li>Security system implementation</li>
+                            <li>Firewall and IDS/IPS configuration</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="job-card delay-4">
+                    <div class="experience">5+ years experience</div>
+                    <h3 class="job-title">Security Administrator</h3>
+                    <div class="job-details">
+                        <ul>
+                            <li>Knowledge of security software and hardware</li>
+                            <li>Understanding of computer systems</li>
+                            <li>Problem solving skills</li>
+                            <li>User access management</li>
+                            <li>Security policy implementation</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="job-card delay-1">
+                    <div class="experience">3-6 years experience</div>
+                    <h3 class="job-title">Incident Responder</h3>
+                    <div class="job-details">
+                        <ul>
+                            <li>Knowledge of incident response procedures</li>
+                            <li>Understanding of malware and hacking techniques</li>
+                            <li>Digital forensic knowledge</li>
+                            <li>Crisis management skills</li>
+                            <li>Threat containment experience</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="job-card delay-2">
+                    <div class="experience">3-5 years experience</div>
+                    <h3 class="job-title">Malware Analyst</h3>
+                    <div class="job-details">
+                        <ul>
+                            <li>Reverse engineering skills</li>
+                            <li>Programming (Python, C++)</li>
+                            <li>Understanding of operating systems</li>
+                            <li>Malware detection techniques</li>
+                            <li>Threat intelligence analysis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apply-container">
+                <a href="application.html" class="apply-button">Apply Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="companyimg.jpeg.jpg" alt="Secure Cyber Logo">
+                    <span>SECURE CYBER</span>
+                </div>
+                <p>Protecting your digital future with cutting-edge cybersecurity solutions and expert consulting services.</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/company/secure-cyber-future/?originalSubdomain=in"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="home.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="#jobs"><i class="fas fa-chevron-right"></i> Careers</a></li>
+                    <li><a href="admin.html"><i class="fas fa-chevron-right"></i> Admin Login</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#"></i> Vulnerability Testing</a></li>
+                    <li><a href="#"></i> Penetration Testing</a></li>
+                    <li><a href="#"></i> Malware Protection</a></li>
+                    <li><a href="#"></i> Security Consulting</a></li>
+                    <li><a href="#"></i> Incident Response</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Security Ave, Cyber City</p>
+                <p><i class="fas fa-envelope"></i> careers@securecyberfuture.com</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 9AM - 6PM</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Secure Cyber Future. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+       
+        const title = "SECURE CYBER FUTURE";
+        const animatedTitle = document.getElementById('animatedTitle');
+        let i = 0;
+        
+        function typeWriter() {
+            if (i < title.length) {
+                animatedTitle.innerHTML += title.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            } else {
+                animatedTitle.innerHTML = title;
+                animatedTitle.classList.add('typing-complete');
+            }
+        }
+        
+        
+        window.onload = function() {
+            setTimeout(typeWriter, 1000);
+        };
+
+        
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        const sections = document.querySelectorAll('.career-hero, .section-title, .job-card, .apply-button');
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+        
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with HR | Secure Cyber</title>
+    <meta name="description" content="Secure communication with HR department">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0a192f;
+            --primary: #1e4b8f;
+            --primary-light: #4a8fe7;
+            --secondary: #172a45;
+            --accent: #64ffda;
+            --light: #f8f9fa;
+            --dark: #020c1b;
+            --text: #ccd6f6;
+            --text-light: #8892b0;
+            --success: #4bb543;
+            --error: #ff3333;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.7;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            background-color: var(--dark);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(10, 25, 47, 0.9);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            height: 80px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+            padding: 0 5%;
+        }
+
+        nav .left {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+            letter-spacing: 0.5px;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        .left img {
+            height: 40px;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
+        /* Chat Container */
+        .chat-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 2rem;
+            background: rgba(23, 42, 69, 0.5);
+            border-radius: 10px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .chat-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .chat-header h2 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        #user-email {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(10, 25, 47, 0.3);
+            border-radius: 8px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            max-width: 70%;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .user-message {
+            background: rgba(100, 255, 218, 0.1);
+            margin-left: auto;
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            color: var(--accent);
+        }
+
+        .hr-message {
+            background: rgba(23, 42, 69, 0.7);
+            margin-right: auto;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 1rem;
+        }
+
+        #message-input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 6px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        #message-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.2);
+        }
+
+        #send-button {
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        #send-button:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .chat-container {
+                padding: 1.5rem;
+            }
+            
+            .message {
+                max-width: 85%;
+            }
+            
+            nav ul {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .chat-container {
+                padding: 1rem;
+            }
+            
+            .message {
+                max-width: 90%;
+                padding: 0.6rem 1rem;
+            }
+            
+            .chat-input {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            #send-button {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <nav>
+        <div class="left">
+            <img src="companyimg.jpeg.jpg" alt="Secure Cyber Logo">
+            <span>SECURE CYBER</span>
+        </div>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="career.html">Careers</a></li>
+            <li><a href="admin.html">Admin Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Secure Query Chat</h2>
+            <p id="user-email"></p>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="chat-input">
+            <input type="text" id="message-input" placeholder="Type your secure message...">
+            <button id="send-button">Send <i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        // Get user email from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const userEmail = urlParams.get('email');
+        document.getElementById('user-email').textContent = `Secure session for: ${userEmail}`;
+
+        // Chat functionality
+        document.getElementById('send-button').addEventListener('click', sendMessage);
+        document.getElementById('message-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        function sendMessage() {
+            const input = document.getElementById('message-input');
+            const message = input.value.trim();
+            if (message) {
+                // Add user message
+                addMessage(message, 'user-message');
+                input.value = '';
+                
+                // Simulate HR response after 1 second
+                setTimeout(() => {
+                    addMessage("Thank you for your message. Our HR team will review your inquiry and respond through secure channels. For sensitive matters, we recommend using our encrypted email system.", 'hr-message');
+                }, 1000);
+            }
+        }
+
+        function addMessage(text, className) {
+            const messagesDiv = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', className);
+            messageDiv.textContent = text;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        // Add welcome message
+        window.onload = function() {
+            setTimeout(() => {
+                addMessage("Welcome to Secure Cyber HR Portal. This is a secure, end-to-end encrypted communication channel. How may we assist you today?", 'hr-message');
+            }, 500);
+        };
+    </script>
+</body>
+</html>
